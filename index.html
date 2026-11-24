@@ -16,7 +16,10 @@
     -webkit-font-smoothing:antialiased;
   }
   .wrap{max-width:760px;margin:0 auto;padding:72px 24px 96px}
-  h1{font-size:15px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin:0 0 40px}
+  h1{font-size:15px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin:0 0 14px}
+  .sub{font-size:14px;color:var(--dim);margin:0 0 40px}
+  h2{font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);margin:40px 0 14px}
+  h2:first-of-type{margin-top:0}
   ul{list-style:none;margin:0;padding:0;display:grid;gap:12px}
   a.item{
     display:flex;align-items:baseline;gap:16px;
@@ -26,19 +29,33 @@
   }
   a.item:hover{border-color:var(--accent);transform:translateY(-1px)}
   .name{font-size:17px;font-weight:550}
-  .slug{margin-left:auto;font:13px ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--dim)}
+  .slug{margin-left:auto;font:13px ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--dim);white-space:nowrap}
+  .meta{font-size:13px;color:var(--dim);margin-top:4px}
   .note{margin-top:44px;font-size:14px;color:var(--dim);border-top:1px solid var(--line);padding-top:20px}
 </style>
 </head>
 <body>
   <div class="wrap">
     <h1>Hosting</h1>
+    <p class="sub">Everything temporary lives here. If it isn't on this page, it isn't hosted.</p>
+
+    <h2>Pages</h2>
     <ul>
       <li><a class="item" href="./super-quant-cards/"><span class="name">Super Quant Cards</span><span class="slug">super-quant-cards</span></a></li>
       <li><a class="item" href="./yugi-jo-strategy-deck/"><span class="name">Yugi Jo Strategy Deck</span><span class="slug">yugi-jo-strategy-deck</span></a></li>
       <li><a class="item" href="./EditorsHandbook/"><span class="name">Editor's Handbook</span><span class="slug">EditorsHandbook</span></a></li>
     </ul>
-    <p class="note">One-off hosted pages. New artifacts go in their own subfolder here.</p>
+
+    <h2>Files</h2>
+    <ul>
+      <li><a class="item" href="./releases/download/scand-choc-1-5/Scandinavian-Chocolate-Ep1-5.mp4"><span><span class="name">Scandinavian Chocolate Ep1-5</span><div class="meta">MP4 &middot; 67&nbsp;MB &middot; 720p</div></span><span class="slug">scand-choc-1-5</span></a></li>
+      <li><a class="item" href="./releases/download/sonic-christmas-blast-reaction-transcript/sonic-christmas-blast-reaction-transcript.md"><span><span class="name">Sonic Christmas Blast &mdash; reaction transcript</span><div class="meta">Markdown</div></span><span class="slug">transcript</span></a></li>
+    </ul>
+
+    <p class="note">
+      Adding something? Put it in its own subfolder (pages) or as a release (files), then list it here.
+      Removing something? Remove its entry here in the same pass &mdash; this page always matches what's actually hosted.
+    </p>
   </div>
 </body>
 </html>
