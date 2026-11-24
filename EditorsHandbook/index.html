@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yugi Jo Channel — Editor's Handbook</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,600;1,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #08060f;
+    --surface: #100d1a;
+    --surface2: #16122a;
+    --border: #2b2245;
+    --accent: #c9a227;
+    --accent-light: #e8c35a;
+    --accent-dim: #3d2f08;
+    --purple: #4a1a8a;
+    --purple-mid: #6b2fb5;
+    --purple-light: #9b59e8;
+    --danger: #c0392b;
+    --danger-bg: #1a0500;
+    --text: #d8d0e8;
+    --muted: #5a4f75;
+    --white: #f5f0ff;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.6;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 32px 80px;
+  }
+
+  /* TOP BAR */
+  .top-bar {
+    background: linear-gradient(90deg, var(--purple) 0%, #2a0f5a 100%);
+    margin: 0 -32px;
+    padding: 10px 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid var(--accent);
+  }
+
+  .top-bar span {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--accent-light);
+  }
+
+  /* HEADER */
+  header {
+    padding-top: 40px;
+    margin-bottom: 48px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: end;
+    gap: 24px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 36px;
+  }
+
+  .header-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .header-label::before {
+    content: '';
+    display: inline-block;
+    width: 24px;
+    height: 2px;
+    background: var(--accent);
+  }
+
+  h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(52px, 8vw, 88px);
+    line-height: 0.9;
+    color: var(--white);
+    letter-spacing: 0.02em;
+  }
+
+  h1 span {
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 60%, var(--purple-light) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    display: block;
+  }
+
+  .header-meta {
+    text-align: right;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    line-height: 2;
+  }
+
+  .header-meta strong {
+    color: var(--accent);
+    font-weight: 500;
+  }
+
+  /* PHILOSOPHY BANNER */
+  .philosophy {
+    background: linear-gradient(135deg, var(--purple) 0%, #2e0f66 100%);
+    border: 1px solid var(--purple-mid);
+    border-left: 4px solid var(--accent);
+    padding: 22px 28px;
+    margin-bottom: 52px;
+    display: flex;
+    gap: 18px;
+    align-items: flex-start;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .philosophy::after {
+    content: '!';
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 80px;
+    color: rgba(255,255,255,0.04);
+    line-height: 1;
+  }
+
+  .phil-icon {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    line-height: 1;
+    flex-shrink: 0;
+    color: var(--accent);
+    margin-top: 2px;
+    border: 2px solid var(--accent);
+    width: 34px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .philosophy p {
+    font-size: 14.5px;
+    font-weight: 400;
+    line-height: 1.6;
+    color: var(--white);
+    margin: 0;
+  }
+
+  .philosophy em {
+    font-style: normal;
+    color: var(--accent-light);
+    font-weight: 600;
+  }
+
+  /* SECTION */
+  .section {
+    margin-bottom: 44px;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .step-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: var(--bg);
+    background: var(--accent);
+    padding: 3px 9px;
+    border-radius: 2px;
+    flex-shrink: 0;
+    font-weight: 500;
+  }
+
+  h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 30px;
+    letter-spacing: 0.05em;
+    color: var(--white);
+    line-height: 1;
+  }
+
+  p {
+    font-size: 13.5px;
+    color: var(--text);
+    margin-bottom: 12px;
+  }
+
+  /* RULE GRID */
+  .rule-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    margin: 16px 0;
+  }
+
+  .rule-card {
+    background: var(--surface);
+    padding: 16px 18px;
+    border: 1px solid var(--border);
+  }
+
+  .rule-card.full {
+    grid-column: 1 / -1;
+  }
+
+  .rule-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--accent-dim);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .rule-title::before {
+    content: '';
+    display: inline-block;
+    width: 3px;
+    height: 10px;
+    background: var(--accent);
+    border-radius: 2px;
+  }
+
+  .rule-card ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .rule-card ul li {
+    font-size: 13px;
+    color: var(--text);
+    padding: 5px 0 5px 14px;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+    line-height: 1.4;
+  }
+
+  .rule-card ul li:last-child { border-bottom: none; }
+
+  .rule-card ul li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--muted);
+    font-size: 11px;
+    top: 5px;
+  }
+
+  /* ALERT BOX */
+  .alert {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    padding: 14px 18px;
+    margin: 14px 0;
+    border-radius: 1px;
+  }
+
+  .alert.danger {
+    background: var(--danger-bg);
+    border: 1px solid rgba(192, 57, 43, 0.4);
+    border-left: 3px solid var(--danger);
+  }
+
+  .alert.warning {
+    background: #140f00;
+    border: 1px solid rgba(201, 162, 39, 0.3);
+    border-left: 3px solid var(--accent);
+  }
+
+  .alert.info {
+    background: var(--surface2);
+    border: 1px solid var(--purple-mid);
+    border-left: 3px solid var(--purple-light);
+  }
+
+  .alert-label {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 14px;
+    letter-spacing: 0.1em;
+    flex-shrink: 0;
+    padding-top: 1px;
+  }
+
+  .alert.danger .alert-label { color: var(--danger); }
+  .alert.warning .alert-label { color: var(--accent); }
+  .alert.info .alert-label { color: var(--purple-light); }
+
+  .alert p {
+    font-size: 13px;
+    margin: 0;
+    line-height: 1.55;
+  }
+
+  /* INLINE LIST */
+  .inline-rules {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    margin: 12px 0;
+  }
+
+  .inline-rule {
+    display: flex;
+    gap: 12px;
+    font-size: 13.5px;
+    align-items: flex-start;
+    padding: 8px 12px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+  }
+
+  .inline-rule .dot {
+    width: 6px;
+    height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 7px;
+  }
+
+  /* SPEC TABLE */
+  .spec-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+  }
+
+  .spec-table tr {
+    border-bottom: 1px solid var(--border);
+  }
+
+  .spec-table tr:last-child { border-bottom: none; }
+
+  .spec-table td {
+    padding: 11px 16px;
+    font-size: 13px;
+  }
+
+  .spec-table td:first-child {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    width: 130px;
+    background: var(--surface2);
+    border-right: 2px solid var(--accent-dim);
+  }
+
+  .spec-table td:last-child {
+    color: var(--white);
+    font-weight: 400;
+    background: var(--surface);
+  }
+
+  /* TWO COL */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    margin: 16px 0;
+  }
+
+  .col-block {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 16px 18px;
+  }
+
+  .col-block h3 {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .col-block ul { list-style: none; }
+
+  .col-block ul li {
+    font-size: 13px;
+    padding: 5px 0 5px 20px;
+    position: relative;
+    border-bottom: 1px solid var(--border);
+    line-height: 1.4;
+  }
+
+  .col-block ul li:last-child { border-bottom: none; }
+
+  .col-block ul li::before {
+    content: '✕';
+    position: absolute;
+    left: 0;
+    font-size: 11px;
+    color: var(--danger);
+    font-weight: 700;
+    top: 5px;
+  }
+
+  .col-block.ok h3 { color: #4da85a; border-color: #1a3a1e; }
+  .col-block.ok { border-color: #1a3a1e; }
+
+  .col-block.ok ul li::before {
+    content: '✓';
+    color: #5dcc6e;
+  }
+
+  /* PRIORITY LIST */
+  .priority-list {
+    counter-reset: priority;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin: 12px 0;
+  }
+
+  .priority-item {
+    counter-increment: priority;
+    display: flex;
+    gap: 14px;
+    align-items: center;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 10px 14px;
+    font-size: 13px;
+    color: var(--text);
+  }
+
+  .priority-item::before {
+    content: counter(priority);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20px;
+    color: var(--purple-light);
+    opacity: 0.6;
+    min-width: 16px;
+    line-height: 1;
+  }
+
+  .priority-item.never {
+    border-color: rgba(192, 57, 43, 0.3);
+    background: var(--danger-bg);
+    color: var(--danger);
+    font-weight: 600;
+  }
+
+  .priority-item.never::before {
+    content: '✕';
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--danger);
+    opacity: 1;
+  }
+
+  /* FOOTER */
+  footer {
+    border-top: 2px solid var(--border);
+    padding-top: 28px;
+    margin-top: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  footer p {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    margin: 0;
+    line-height: 1.8;
+  }
+
+  .footer-right {
+    text-align: right;
+  }
+
+  .footer-mark {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 26px;
+    background: linear-gradient(135deg, var(--accent), var(--accent-light));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: 0.1em;
+    display: block;
+  }
+
+  .footer-sub {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.15em;
+  }
+
+  strong { color: var(--white); font-weight: 600; }
+
+  @media (max-width: 600px) {
+    .rule-grid, .two-col { grid-template-columns: 1fr; }
+    .rule-card.full { grid-column: 1; }
+    header { grid-template-columns: 1fr; }
+    .header-meta { text-align: left; }
+    .top-bar span:last-child { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <span>Yugi Jo Channel</span>
+  <span>Editor's Handbook · Rev. 2025</span>
+  <span>Read Before Every Project</span>
+</div>
+
+<header>
+  <div>
+    <div class="header-label">Channel Editing Guidelines</div>
+    <h1>Editor's<span>Handbook</span></h1>
+  </div>
+  <div class="header-meta">
+    <strong>Platform</strong> Premiere Pro<br>
+    <strong>Format</strong> 1080p / H.264<br>
+    <strong>Delivery</strong> Google Drive<br>
+    <strong>Questions</strong> Discord
+  </div>
+</header>
+
+<div class="philosophy">
+  <div class="phil-icon">!</div>
+  <p>This channel is fast-paced and high energy. Every second should <em>inform, entertain, or hook</em> the viewer into the next moment. Dead air, filler words, slow pans, and awkward pauses are the enemy. Your job is to make sure they never get bored.</p>
+</div>
+
+<!-- BEFORE YOU START -->
+<div class="section">
+  <div class="section-header">
+    <span class="step-num">PRE-FLIGHT</span>
+    <h2>Before You Start</h2>
+  </div>
+  <div class="inline-rules">
+    <div class="inline-rule"><div class="dot"></div><span>Confirm you have all footage, assets, music, and any reference clips before touching the timeline.</span></div>
+    <div class="inline-rule"><div class="dot"></div><span>A setup folder of resources will have been sent — check it first. It contains preferred audio tracks and a <strong>library of Premiere Pro presets</strong>. Use them as directed in the outline.</span></div>
+    <div class="inline-rule"><div class="dot"></div><span><strong>Epidemic Sound</strong> tracks are also approved. Need a specific track downloaded? Ask before proceeding.</span></div>
+    <div class="inline-rule"><div class="dot"></div><span>Green screen footage of <strong>Yugi Jo</strong> will be sent pre-synced and mostly cut. If it hasn't been cut yet — start there first.</span></div>
+  </div>
+</div>
+
+<!-- ROUGH CUT -->
+<div class="section">
+  <div class="section-header">
+    <span class="step-num">STEP 01</span>
+    <h2>Rough Cut</h2>
+  </div>
+  <p>Watch through <em>all</em> footage at least once before making a single cut. Use the <strong>Green Screen preset</strong> to key Yugi Jo's footage. Keep energy consistent throughout — flat delivery should be flagged, not automatically scrapped.</p>
+
+  <div class="rule-grid">
+    <div class="rule-card">
+      <div class="rule-title">Cut Every Filler Word</div>
+      <ul>
+        <li>"um" / "uh"</li>
+        <li>"like" / "you know"</li>
+        <li>"so" / "basically"</li>
+        <li>Any dead air over 0.5 seconds</li>
+      </ul>
+    </div>
+    <div class="rule-card">
+      <div class="rule-title">Cut Without Thinking</div>
+      <ul>
+        <li>Stumbles & re-dos</li>
+        <li>Long mid-sentence pauses</li>
+        <li>Off-camera noise / distractions</li>
+        <li>Repeated points — keep the best/cleanest</li>
+      </ul>
+    </div>
+    <div class="rule-card">
+      <div class="rule-title">Flag — Don't Cut</div>
+      <ul>
+        <li>Slow content that may be important</li>
+        <li>Segments you're unsure about</li>
+        <li>Off performance with no better take</li>
+      </ul>
+    </div>
+    <div class="rule-card">
+      <div class="rule-title">Pacing Rules</div>
+      <ul>
+        <li>Jump cuts = energy — use them freely</li>
+        <li>Flag any section 45+ sec with no visual break</li>
+        <li>Always use the cleanest take available</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- B-ROLL -->
+<div class="section">
+  <div class="section-header">
+    <span class="step-num">STEP 02</span>
+    <h2>B-Roll & Clips</h2>
+  </div>
+
+  <div class="alert info">
+    <span class="alert-label">FORMAT</span>
+    <p>B-roll is overlayed over the top of the backdrop at <strong>90 scale or 80 scale</strong> and given the <strong>preset PNG drop shadow</strong>. Apply this consistently to every B-roll clip.</p>
+  </div>
+
+  <div class="two-col" style="margin-top:14px;">
+    <div class="col-block ok">
+      <h3>Approved Sources</h3>
+      <ul>
+        <li>Original footage shot for video</li>
+        <li>Screen recordings / demos</li>
+        <li>Approved stock footage sites</li>
+        <li>Archival / reference clips</li>
+      </ul>
+    </div>
+    <div class="col-block">
+      <h3>Never Use</h3>
+      <ul>
+        <li>AI-generated footage</li>
+        <li>Watermarked content</li>
+        <li>Unlicensed audio under clips</li>
+        <li>Any unapproved stock site</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="inline-rules" style="margin-top:14px;">
+    <div class="inline-rule"><div class="dot"></div><span>Cut to B-roll every time a specific thing, place, person, or concept is mentioned.</span></div>
+    <div class="inline-rule"><div class="dot"></div><span>No more than <strong>30–45 seconds of unbroken A-roll</strong> — use B-roll to break it up.</span></div>
+    <div class="inline-rule"><div class="dot"></div><span>Trim B-roll tight. Cut back to A-roll the moment the point is made.</span></div>
+    <div class="inline-rule"><div class="dot"></div><span>B-roll energy must match narration energy at all times.</span></div>
+  </div>
+
+  <div class="alert danger" style="margin-top:12px;">
+    <span class="alert-label">NEVER</span>
+    <p>No AI-generated footage. No watermarked content. Not ever — regardless of context or reason.</p>
+  </div>
+</div>
+
+<!-- MUSIC & SFX -->
+<div class="section">
+  <div class="section-header">
+    <span class="step-num">STEP 03</span>
+    <h2>Music & Sound</h2>
+  </div>
+  <div class="rule-grid">
+    <div class="rule-card">
+      <div class="rule-title">Music Rules</div>
+      <ul>
+        <li>Never overpowers the voice</li>
+        <li>High-BPM for intro / transitions</li>
+        <li>Lower energy under informational sections</li>
+        <li>Always fade out — never hard cut</li>
+      </ul>
+    </div>
+    <div class="rule-card">
+      <div class="rule-title">SFX Rules (Optional)</div>
+      <ul>
+        <li>Punctuate jokes, transitions, text pop-ins</li>
+        <li>Keep subtle — less is more</li>
+        <li>Be consistent: same graphic = same sound</li>
+        <li>SFX is optional per video, not mandatory</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- TRANSITIONS -->
+<div class="section">
+  <div class="section-header">
+    <span class="step-num">STEP 04</span>
+    <h2>Transitions</h2>
+  </div>
+  <div class="alert info">
+    <span class="alert-label">HOW TO</span>
+    <p>Pre-made transitions are included in the setup folder. Add the clip to the timeline, then set its <strong>blending mode to Screen</strong>. Get creative — use what fits the moment.</p>
+  </div>
+</div>
+
+<!-- GRAPHICS -->
+<div class="section">
+  <div class="section-header">
+    <span class="step-num">STEP 05</span>
+    <h2>Graphics, Text & Captions</h2>
+  </div>
+  <div class="inline-rules">
+    <div class="inline-rule"><div class="dot"></div><span>Text is for <strong>emphasis only</strong> — don't caption everything that's said.</span></div>
+    <div class="inline-rule"><div class="dot"></div><span>Keep text short: <strong>5 words or fewer</strong> where possible.</span></div>
+    <div class="inline-rule"><div class="dot"></div><span>Font: <strong>Montserrat</strong>. Maintain consistent font and colour throughout the video.</span></div>
+    <div class="inline-rule"><div class="dot"></div><span>Captions: bold text with a subtle dark background or outline for readability. <strong>Max 2 lines</strong> on screen. Break at natural speech pauses. Spoken word only — do not caption music or SFX.</span></div>
+    <div class="inline-rule"><div class="dot"></div><span>Captions are <strong>optional per video</strong>. If used: auto-generate as a base, then manually correct all errors.</span></div>
+  </div>
+</div>
+
+<!-- COLOUR -->
+<div class="section">
+  <div class="section-header">
+    <span class="step-num">STEP 06</span>
+    <h2>Colour Grading</h2>
+  </div>
+  <p>Apply a consistent LUT or grade across <strong>all B-roll</strong> in a video. Do not mix grades. If the grade looks too heavy on certain footage, tone it down — but keep it consistent throughout. Colour grading is also done for copyright protection purposes.</p>
+  <div class="alert warning">
+    <span class="alert-label">TIP</span>
+    <p>If B-roll is flagging copyright issues at upload, add a <strong>70–80% opacity logo watermark</strong> over the clip. See the Fairy Tail videos for reference on how this should look.</p>
+  </div>
+</div>
+
+<!-- EXPORT -->
+<div class="section">
+  <div class="section-header">
+    <span class="step-num">STEP 07</span>
+    <h2>Export Settings</h2>
+  </div>
+  <table class="spec-table">
+    <tr><td>Codec</td><td>H.264 or H.265</td></tr>
+    <tr><td>Resolution</td><td>1920 × 1080 (1080p)</td></tr>
+    <tr><td>Frame Rate</td><td>Match source — typically 24, 25, or 30fps</td></tr>
+    <tr><td>Audio</td><td>AAC · 48kHz · Stereo · 320kbps</td></tr>
+    <tr><td>Format</td><td>.MP4 or .MOV</td></tr>
+  </table>
+</div>
+
+<!-- COPYRIGHT -->
+<div class="section">
+  <div class="section-header">
+    <span class="step-num">STEP 08</span>
+    <h2>Copyright</h2>
+  </div>
+  <div class="alert danger">
+    <span class="alert-label">NEVER</span>
+    <p>Use audio from copyrighted shows, films, or broadcasts without altering it first. Never use music that isn't cleared, licensed, or royalty-free. Never use AI-generated or watermarked footage.</p>
+  </div>
+  <div class="inline-rules" style="margin-top:12px;">
+    <div class="inline-rule"><div class="dot"></div><span>If a B-roll clip has copyrighted audio — <strong>mute it</strong> and replace with music or SFX before delivery.</span></div>
+    <div class="inline-rule"><div class="dot"></div><span>Upload to your channel as <strong>Unlisted first</strong> to check for copyright strikes before sharing the draft.</span></div>
+    <div class="inline-rule"><div class="dot"></div><span>Persistent B-roll copyright issues can be resolved with a <strong>70–80% opacity logo watermark</strong> over the clip.</span></div>
+  </div>
+</div>
+
+<!-- DELIVERY -->
+<div class="section">
+  <div class="section-header">
+    <span class="step-num">STEP 09</span>
+    <h2>Review & Delivery</h2>
+  </div>
+  <div class="rule-grid">
+    <div class="rule-card">
+      <div class="rule-title">Draft Delivery</div>
+      <ul>
+        <li>Export & upload to Google Drive</li>
+        <li>Include a timecoded .txt for all flags</li>
+        <li>Note anything you were unsure about</li>
+      </ul>
+    </div>
+    <div class="rule-card">
+      <div class="rule-title">Revisions</div>
+      <ul>
+        <li>Timecoded notes will be provided</li>
+        <li>Work back-to-front to keep timecodes accurate</li>
+        <li>Re-export as v02, v03 — never overwrite</li>
+        <li>Unclear note? Ask on Discord</li>
+      </ul>
+    </div>
+    <div class="rule-card full">
+      <div class="rule-title">Final Delivery</div>
+      <ul>
+        <li>Final export uploaded to the specified Google Drive folder — not just the general Drive</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>Questions & revision notes → Discord first, always.<br>Read this document before starting every new project.</p>
+  <div class="footer-right">
+    <span class="footer-mark">YUGI JO</span>
+    <span class="footer-sub">Editor's Handbook · 2025</span>
+  </div>
+</footer>
+
+</body>
+</html>
